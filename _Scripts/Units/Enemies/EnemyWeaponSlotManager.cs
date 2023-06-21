@@ -32,7 +32,7 @@ public class EnemyWeaponSlotManager : CharacterWeaponSlotManager {
     public override void LoadWeaponOnSlot(WeaponItem weapon, bool isLeft) {
         WeaponItem weaponToEquip = weapon != null ? weapon : unarmedWeapon;
 
-        if (isLeft) {
+        if (isLeft && leftHandSlot != null) {
             leftHandSlot.CurrentWeaponItem = weaponToEquip;
             leftHandSlot.LoadWeaponModel(weaponToEquip);
             LoadLeftWeaponDamageCollider();

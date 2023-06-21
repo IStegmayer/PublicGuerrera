@@ -9,63 +9,63 @@ public class CharacterAnimatorManager : MonoBehaviour {
     public bool CanRotate;
 
     // properties hashes
-    public int IsGroundedHash;
-    public int IsUsingRightHandHash;
-    public int IsUsingLeftHandHash;
-    public int VerticalHash;
-    public int HorizontalHash;
-    public int IsInteractingHash;
-    public int IsDeadHash;
-    public int IsBlockingHash;
-    public int CanRotateHash;
-    public int IsFiringSpellHash;
-    public int IsRotatingWithRMHash;
-    public int IsPhaseShiftingHash;
-    public int CanDoComboHash;
-    public int IsInvulnerableHash;
-    public int InAirTimer;
-    public int IsChargingAttackHash;
-    public int IsTwoHandingWeaponHash;
+    public int IsGroundedHash { get; private set; }
+    public int IsUsingRightHandHash { get; private set; }
+    public int IsUsingLeftHandHash { get; private set; }
+    public int VerticalHash { get; private set; }
+    public int HorizontalHash { get; private set; }
+    public int IsInteractingHash { get; private set; }
+    public int IsDeadHash { get; private set; }
+    public int IsBlockingHash { get; private set; }
+    public int CanRotateHash { get; private set; }
+    public int IsFiringSpellHash { get; private set; }
+    public int IsRotatingWithRMHash { get; private set; }
+    public int IsPhaseShiftingHash { get; private set; }
+    public int CanDoComboHash { get; private set; }
+    public int IsInvulnerableHash { get; private set; }
+    public int InAirTimer { get; private set; }
+    public int IsChargingAttackHash { get; private set; }
+    public int IsTwoHandingWeaponHash { get; private set; }
 
     // states hashes
-    public int RollHash;
-    public int BackstepHash;
-    public int LandHash;
-    public int FallHash;
-    public int EmptyHash;
-    public int LightAttack1Hash;
-    public int LightAttack2Hash;
-    public int HeavyAttack1Hash;
-    public int HeavyAttack2Hash;
-    public int RunningAttackHash;
-    public int TH_LightAttack1Hash;
-    public int TH_LightAttack2Hash;
-    public int TH_HeavyAttack1Hash;
-    public int TH_HeavyAttack2Hash;
-    public int TH_RunningAttackHash;
-    public int WeaponArtHash;
-    public int LeftArmIdleHash;
-    public int RightArmIdleHash;
-    public int TH_IdleHash;
-    public int DeathHash;
-    public int JumpHash;
-    public int FailedCastHash;
-    public int BackStabHash;
-    public int RiposteHash;
-    public int RipostedHash;
-    public int BackStabbedHash;
-    public int OpenChestHash;
-    public int PassThroughFogWallHash;
-    public int BlockHash;
-    public int GuardBreakHash;
-    public int BlockDamage1Hash;
-    public int Damage1Hash;
-    public int TurnAroundHash;
-    public int TurnRightHash;
-    public int TurnLeftHash;
-    public int PhaseTransitionHash;
-    public int ParriedHash;
-    public int ParryHash;
+    public int RollHash { get; private set; }
+    public int BackstepHash { get; private set; }
+    public int LandHash { get; private set; }
+    public int FallHash { get; private set; }
+    public int EmptyHash { get; private set; }
+    public int LightAttack1Hash { get; private set; }
+    public int LightAttack2Hash { get; private set; }
+    public int HeavyAttack1Hash { get; private set; }
+    public int HeavyAttack2Hash { get; private set; }
+    public int RunningAttackHash { get; private set; }
+    public int TH_LightAttack1Hash { get; private set; }
+    public int TH_LightAttack2Hash { get; private set; }
+    public int TH_HeavyAttack1Hash { get; private set; }
+    public int TH_HeavyAttack2Hash { get; private set; }
+    public int TH_RunningAttackHash { get; private set; }
+    public int WeaponArtHash { get; private set; }
+    public int LeftArmIdleHash { get; private set; }
+    public int RightArmIdleHash { get; private set; }
+    public int TH_IdleHash { get; private set; }
+    public int DeathHash { get; private set; }
+    public int JumpHash { get; private set; }
+    public int FailedCastHash { get; private set; }
+    public int BackStabHash { get; private set; }
+    public int RiposteHash { get; private set; }
+    public int RipostedHash { get; private set; }
+    public int BackStabbedHash { get; private set; }
+    public int OpenChestHash { get; private set; }
+    public int PassThroughFogWallHash { get; private set; }
+    public int BlockHash { get; private set; }
+    public int GuardBreakHash { get; private set; }
+    public int BlockDamage1Hash { get; private set; }
+    public int Damage1Hash { get; private set; }
+    public int TurnAroundHash { get; private set; }
+    public int TurnRightHash { get; private set; }
+    public int TurnLeftHash { get; private set; }
+    public int PhaseTransitionHash { get; private set; }
+    public int ParriedHash { get; private set; }
+    public int ParryHash { get; private set; }
 
     protected virtual void Awake() {
         VerticalHash = Animator.StringToHash("Vertical");
@@ -165,13 +165,14 @@ public class CharacterAnimatorManager : MonoBehaviour {
     public static event Action ComboDisabled;
     public virtual void EnableRotation() => Anim.SetBool(CanRotateHash, true);
     public virtual void DisableRotation() => Anim.SetBool(CanRotateHash, false);
-    
+
     public virtual void EnableCombo() => Anim.SetBool(CanDoComboHash, true);
+
     public virtual void DisableCombo() {
         Anim.SetBool(CanDoComboHash, false);
         ComboDisabled?.Invoke();
     }
-    
+
     public virtual void EnableIsInvulnerable() => Anim.SetBool(IsInvulnerableHash, true);
     public virtual void DisableIsInvulnerable() => Anim.SetBool(IsInvulnerableHash, false);
 

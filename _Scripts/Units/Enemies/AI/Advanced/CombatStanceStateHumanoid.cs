@@ -18,7 +18,7 @@ public class CombatStanceStateHumanoid : State {
         if (enemy.combatStyle == HumanAICombatStyle.Melee)
             return ProcessMeleeCombatStyle(enemy);
         else if (enemy.combatStyle == HumanAICombatStyle.Shaman)
-            return ProcessShamanCombatStyle();
+            return ProcessShamanCombatStyle(enemy);
 
         return this;
     }
@@ -110,8 +110,36 @@ public class CombatStanceStateHumanoid : State {
         }
     }
 
+    private State ProcessShamanCombatStyle(EnemyManager enemy) {
+        //If the A.I is falling, or is performing some sort of action STOP all movement
+        if (!enemy.IsGrounded || enemy.IsInteracting) {
+            enemy.animator.SetFloat("Vertical", 0);
+            enemy.animator.SetFloat("Horizontal", 0);
+            return this;
+        }
 
-    private State ProcessShamanCombatStyle() {
+        //If the A.I has gotten too far from it's target, return the A.I to it's pursue target state
+        if (enemy.DistanceFromTarget > enemy.MaxAggroRadius) {
+            ResetStateFlags();
+            return pursueTargetState;
+        }
+
+        //Randomizes the walking pattern of our A.I so they circle the player
+        if (!randomDestinationSet) {
+            randomDestinationSet = true;
+            DecideCirclingAction(enemy.CharacterAnimatorManager);
+        }
+
+        HandleRotateTowardsTarget(enemy);
+
+        if (enemy.CurrentRecoveryTime <= 0) {
+            ResetStateFlags();
+            return attackState;
+        }
+
+        enemy.animator.SetFloat(enemy.CharacterAnimatorManager.VerticalHash, 0, 0.2f, Time.deltaTime);
+        enemy.animator.SetFloat(enemy.CharacterAnimatorManager.HorizontalHash, 0, 0.2f, Time.deltaTime);
+        
         return this;
     }
 

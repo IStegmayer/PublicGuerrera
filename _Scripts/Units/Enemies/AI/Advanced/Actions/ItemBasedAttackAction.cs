@@ -58,8 +58,8 @@ public class ItemBasedAttackAction : ScriptableObject {
     private void PerformLeftHandedMeleeAction(EnemyManager enemyManager) {
         throw new System.NotImplementedException();
     }
-    private void PerformMagicAction(EnemyManager enemyManager) {
-        throw new System.NotImplementedException();
+    private void PerformMagicAction(EnemyManager enemy) {
+        enemy.CharacterInventoryManager.RightWeapon.TH_TapRBAction.PerformAction(enemy);
     }
 }
 }

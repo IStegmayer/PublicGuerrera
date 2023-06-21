@@ -28,7 +28,6 @@ public class PlayerManager : CharacterManager {
         anim = GetComponent<Animator>();
         playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
         playerStatsManager = GetComponent<PlayerStatsManager>();
-        BackStabCollider = GetComponentInChildren<CriticalDamageCollider>();
     }
 
     private void Update() {

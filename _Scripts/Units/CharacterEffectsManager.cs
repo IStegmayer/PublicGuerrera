@@ -2,12 +2,11 @@
 
 namespace Dzajna {
 public class CharacterEffectsManager : MonoBehaviour {
-    [Header("Damage FX")]
+    [Header("Damage FX")] 
     [SerializeField] private GameObject bloodSplatterFX;
-    
-    [Header("Weapon FX")]
-    public WeaponFX RightWeaponFX;
-    public WeaponFX LeftWeaponFX;
+
+    public WeaponFX RightWeaponFX { get; set; }
+    public WeaponFX LeftWeaponFX { get; set; }
 
     public virtual void PlayRightWeaponFX() {
         if (RightWeaponFX != null) RightWeaponFX.PlayWeaponFX();

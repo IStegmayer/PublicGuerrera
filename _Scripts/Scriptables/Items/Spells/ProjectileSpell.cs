@@ -5,7 +5,9 @@ namespace Dzajna {
 public class ProjectileSpell : SpellItem {
     public float BaseDamage;
 
-    [Header("Projectile physics")] public float ProjectileForwardVelocity;
+    [Header("Projectile physics")] // 
+    public float ProjectileForwardVelocity;
+
     public float ProjectileUpwardVelocity;
     public float ProjectileMass;
     public bool UsesGravity;
@@ -18,6 +20,7 @@ public class ProjectileSpell : SpellItem {
         castRotation = PlayerCamera.Instance.GetCameraRotation();
         GameObject warmUpSFXInstance =
             Instantiate(spellWarmUpFX, character.CharacterWeaponSlotManager.GetRightHandTransform());
+        Destroy(warmUpSFXInstance, 2f);
         character.CharacterAnimatorManager.PlayTargetAnimation(spellAnimation, true);
     }
 
@@ -32,11 +35,16 @@ public class ProjectileSpell : SpellItem {
         charAnim.Anim.SetBool(charAnim.IsFiringSpellHash, true);
         // spellDamageCollider - spellFXInstance.GetComponent<SpellDamageCollider>();
 
-        if (camera.CurrentLockOnTarget != null)
-            spellFXInstance.transform.LookAt(camera.CurrentLockOnTarget.transform);
-        else
-            spellFXInstance.transform.rotation = Quaternion.Euler(camera.GetCameraTransform().eulerAngles.x,
-                character.transform.eulerAngles.y, 0);
+        EnemyManager enemy = character as EnemyManager;
+        if (enemy == null) {
+            if (camera.CurrentLockOnTarget != null)
+                spellFXInstance.transform.LookAt(camera.CurrentLockOnTarget.transform);
+            else
+                spellFXInstance.transform.rotation = Quaternion.Euler(camera.GetCameraTransform().eulerAngles.x,
+                    character.transform.eulerAngles.y, 0);
+        }
+        else if (enemy.CurrentTarget != null)
+            spellFXInstance.transform.LookAt(enemy.CurrentTarget.transform.position);
 
         rigidbody.AddForce(spellFXInstance.transform.forward * ProjectileForwardVelocity);
         rigidbody.AddForce(spellFXInstance.transform.up * ProjectileUpwardVelocity);

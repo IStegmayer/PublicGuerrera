@@ -86,10 +86,6 @@ public class PlayerCombatManager : CharacterCombatManager {
         // else perform art for left handed weapon
     }
 
-    public void SuccessfullyCastSpell() {
-        characterInventoryManager.CurrentSpell.SuccessfullyCastedSpell(playerManager);
-    }
-
     public void HandleWeaponCombo(WeaponItem weaponItem) {
         if (!inputHandler.ComboFlag) return;
 

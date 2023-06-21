@@ -43,7 +43,34 @@ public class AttackStateHumanoid : State {
     }
 
     private State ProcessShamanCombatStyle(EnemyManager enemy) {
-        throw new System.NotImplementedException();
+        RotateTowardsTargetWhilstAttacking(enemy);
+
+        if (enemy.IsInteracting) return this;
+
+        if (enemy.IsFiringSpell) {
+            ResetStateFlags();
+            return combatStanceState;
+        }
+
+        if (enemy.CurrentTarget.IsDead) {
+            ResetStateFlags();
+            enemy.CurrentTarget = null;
+            return this;
+        }
+
+        if (enemy.DistanceFromTarget > enemy.MaxAggroRadius) {
+            ResetStateFlags();
+            return pursueTargetState;
+        }
+
+        if (!hasPerformedAttack) {
+            AttackTarget(enemy);
+            return this;
+        }
+
+        ResetStateFlags();
+
+        return rotateTowardsTargetState;
     }
 
     private void RollForComboChance(EnemyManager enemy) {

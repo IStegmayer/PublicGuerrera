@@ -9,8 +9,8 @@ public class CharacterCombatManager : MonoBehaviour {
     [SerializeField] private Transform riposterStandPoint;
     [SerializeField] protected float maxCritDistance = 1.5f;
     [SerializeField] private LayerMask characterLayer;
-    public int LastAttackHash;
-    public AttackType CurrentAttackType;
+    public int LastAttackHash { get; set; }
+    public AttackType CurrentAttackType { get; set; }
 
     protected CharacterManager character;
 
@@ -164,6 +164,10 @@ public class CharacterCombatManager : MonoBehaviour {
         else {
             character.CharacterAnimatorManager.PlayTargetAnimation(character.CharacterAnimatorManager.BlockHash, true);
         }
+    }
+    
+    public void SuccessfullyCastSpell() {
+        character.CharacterInventoryManager.CurrentSpell.SuccessfullyCastedSpell(character);
     }
 }
 }

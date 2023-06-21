@@ -49,7 +49,6 @@ public class EnemyManager : CharacterManager {
         enemyStatsManager = GetComponent<EnemyStatsManager>();
         NavMeshAgent = GetComponentInChildren<NavMeshAgent>();
         Rigidbody = GetComponent<Rigidbody>();
-        BackStabCollider = GetComponentInChildren<CriticalDamageCollider>();
     }
 
     protected override void Start() {

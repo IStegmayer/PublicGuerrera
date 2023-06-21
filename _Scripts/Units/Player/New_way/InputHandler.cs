@@ -112,26 +112,6 @@ public class InputHandler : PersistentSingleton<InputHandler> {
         inputActions.Enable();
     }
 
-    public void OnDisable() {
-        // making sure to cleanup
-        inputActions.Disable();
-    }
-
-    private void LateUpdate() {
-        //reset flags
-        RollFlag = false;
-        RBInput = false;
-        RTInput = false;
-        LTInput = false;
-        AInput = false;
-        JumpInput = false;
-        LockOnInput = false;
-        DPadRightInput = false;
-        DPadLeftInput = false;
-        DPadUpInput = false;
-        DPadDownInput = false;
-    }
-
     public void TickInput(float delta) {
         if (player.IsDead) return;
         
@@ -354,7 +334,27 @@ public class InputHandler : PersistentSingleton<InputHandler> {
             playerWeaponSlotManager.LoadWeaponOnSlot(characterInventoryManager.LeftWeapon, true);
         }
     }
-
+    
     public void SetComboFlag(bool val) => ComboFlag = val;
+
+    public void OnDisable() {
+        // making sure to cleanup
+        inputActions.Disable();
+    }
+
+    private void LateUpdate() {
+        //reset flags
+        RollFlag = false;
+        RBInput = false;
+        RTInput = false;
+        LTInput = false;
+        AInput = false;
+        JumpInput = false;
+        LockOnInput = false;
+        DPadRightInput = false;
+        DPadLeftInput = false;
+        DPadUpInput = false;
+        DPadDownInput = false;
+    }
 }
 }

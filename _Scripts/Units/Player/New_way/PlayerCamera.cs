@@ -142,8 +142,7 @@ public class PlayerCamera : PersistentSingleton<PlayerCamera> {
         for (int j = 0; j < availableTargets.Count; j++) {
             Vector3 targetPos = availableTargets[j].transform.position;
 
-            float distanceFromTarget =
-                Vector3.Distance(playerTargetPosition, targetPos);
+            float distanceFromTarget = Vector3.Distance(playerTargetPosition, targetPos);
             if (distanceFromTarget < shortestDistance) {
                 shortestDistance = distanceFromTarget;
                 nearestLockOnTarget = availableTargets[j];

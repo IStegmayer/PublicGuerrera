@@ -26,10 +26,10 @@ public class SpellDamageCollider : DamageCollider {
         rigidbody = GetComponent<Rigidbody>();
     }
 
-    private void OnTriggerEnter(Collider _other) {
+    private void OnTriggerEnter(Collider other) {
         if (hasCollided) return;
 
-        spellTarget = _other.transform.GetComponent<CharacterStatsManager>();
+        spellTarget = other.transform.GetComponent<CharacterStatsManager>();
         if (spellTarget != null) spellTarget.TakeDamage(PhysicalDamage); 
         
         hasCollided = true;

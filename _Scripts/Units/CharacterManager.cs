@@ -16,10 +16,6 @@ namespace Dzajna
         
         [Header("Lock On Transform")]
         public Transform LockOnTransform;
-        
-        [Header("Combat Colliders")]
-        public CriticalDamageCollider BackStabCollider;
-        public CriticalDamageCollider RiposteCollider;
 
         [Header("Combat Flags")] 
         public bool CanBeRiposted;

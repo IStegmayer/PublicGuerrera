@@ -19,7 +19,9 @@ public class EnemyStatsManager : CharacterStatsManager {
         enemyManager = GetComponent<EnemyManager>();
         enemyCharacterAnimatorManager = GetComponent<EnemyCharacterAnimatorManager>();
         enemyBossManager = GetComponent<EnemyBossManager>();
-        maxHealth = SetMaxHealthFromHealthLevel(); 
+        maxHealth = SetMaxHealthFromHealthLevel();      
+        maxFP = SetMaxFPAmountFromFocusLevel();
+        currentFP = maxFP;
         currentHealth = maxHealth;
     }
 
@@ -30,6 +32,10 @@ public class EnemyStatsManager : CharacterStatsManager {
     protected override void HandlePoiseResetTimer() {
         if (PoiseResetTimer > 0) PoiseResetTimer = PoiseResetTimer - Time.deltaTime;
         else if (!enemyManager.IsInteracting) TotalPoise = ArmorPoise;
+    }
+    
+    private int SetMaxFPAmountFromFocusLevel() {
+        return focusLevel * focusPerLevel;
     }
     
     private int SetMaxHealthFromHealthLevel() {
